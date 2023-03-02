@@ -13,7 +13,7 @@ clearable style="width: 300px;margin-bottom: 50px;">
 <p class="erruser" v-show="isuser">账号错误啦！</p>
 <el-input placeholder="请输入密码" v-model="password" prefix-icon="el-icon-s-tools" show-password style="width: 300px;margin-bottom: 50px;"></el-input>
 <p class="errpas" v-show="ispas">密码错误啦！</p>
-<el-button type="warning" @click="tohome">立即登录</el-button>
+<el-button type="warning" @click="tohome" :loading="loding">立即登录</el-button>
          </div>
       </div>
       <div class="right">
@@ -33,6 +33,7 @@ export default {
       password: '111111',
       isuser: false,
       ispas: false,
+      loding: false
     };
   },
   computed: {
@@ -49,18 +50,21 @@ export default {
   },
   methods: {
     tohome () {
-      if (this.username === 'admin' && this.password === '111111') { this.$router.push('/home') } else {
-        if (this.password !== '111111' && this.username !== 'admin') {
-          this.ispas = true
-          this.isuser = true
-        } else if (this.username !== 'admin') {
-          this.isuser = true
-        } else {
-          (
+      this.loding = true
+      setTimeout(() => {
+        if (this.username === 'admin' && this.password === '111111') { this.$router.push('/home') } else {
+          if (this.password !== '111111' && this.username !== 'admin') {
             this.ispas = true
-          )
+            this.isuser = true
+          } else if (this.username !== 'admin') {
+            this.isuser = true
+          } else {
+            (
+              this.ispas = true
+            )
+          }
         }
-      }
+      }, 300)
     }
   },
   components: {
