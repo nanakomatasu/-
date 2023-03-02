@@ -49,7 +49,7 @@ export default {
   },
   methods: {
     tohome () {
-      if (this.username === 'admin' && this.password === '111111') { this.$router.push('/home/main') } else {
+      if (this.username === 'admin' && this.password === '111111') { this.$router.push('/home') } else {
         if (this.password !== '111111' && this.username !== 'admin') {
           this.ispas = true
           this.isuser = true
