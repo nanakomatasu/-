@@ -9,7 +9,7 @@ request.interceptors.request.use(
     return config;
   },
   (err) => {
-    return err;
+    return Promise.reject(err);
   }
 );
 
