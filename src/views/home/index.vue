@@ -82,13 +82,16 @@
   </el-aside>
 
   <el-container>
-    <el-header>Header</el-header>
+    <el-header>
+    <headerpage />
+    </el-header>
     <el-main>Main</el-main>
   </el-container>
 </el-container>
 </template>
 
 <script>
+import headerpage from '@/views/header'
 export default {
   props: {
 
@@ -116,7 +119,7 @@ export default {
     }
   },
   components: {
-
+    headerpage
   },
 };
 </script>
