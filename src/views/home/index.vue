@@ -13,16 +13,18 @@
       @close="handleClose"
       style="height: 550px;">
 
-      <el-menu-item index="1">
+      <el-menu-item index="1" @click="() => this.$router.push('/home/bench')">
         <i class="el-icon-s-operation"></i>
-        <span slot="title">工作台</span>
+        <span slot="title" >工作台</span>
       </el-menu-item>
       <el-submenu index="2">
         <template slot="title">
           <i class="el-icon-postcard"></i>
           <span>基础信息管理</span>
         </template>
-        <el-menu-item index="2-1" >仓库管理</el-menu-item>
+        <el-menu-item index="2-1"  @click="() => {
+          this.$router.push('/home/warehouse')
+        }">仓库管理</el-menu-item>
           <el-menu-item index="2-2">库区管理</el-menu-item>
           <el-menu-item index="2-3">库位管理</el-menu-item>
           <el-menu-item index="2-4">库位视图</el-menu-item>
@@ -85,7 +87,9 @@
     <el-header>
     <headerpage />
     </el-header>
-    <el-main>Main</el-main>
+    <el-main>
+      <router-view></router-view>
+    </el-main>
   </el-container>
 </el-container>
 </template>

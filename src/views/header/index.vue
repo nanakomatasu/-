@@ -1,10 +1,14 @@
 <template>
-   <el-breadcrumb separator-class="el-icon-arrow-right">
-  <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-  <el-breadcrumb-item>活动管理</el-breadcrumb-item>
-  <el-breadcrumb-item>活动列表</el-breadcrumb-item>
-  <el-breadcrumb-item>活动详情</el-breadcrumb-item>
+  <div class="page">
+    <el-breadcrumb separator-class="el-icon-arrow-right">
+  <el-breadcrumb-item :to="{ path: '/home' }" >工作台</el-breadcrumb-item>
+  <el-breadcrumb-item v-for="(item,index) in history" :key="index">{{ item }}</el-breadcrumb-item>
 </el-breadcrumb>
+<div class="breadoption">
+  <i></i>
+</div>
+  </div>
+
 </template>
 
 <script>
@@ -14,7 +18,7 @@ export default {
   },
   data () {
     return {
-
+      history: ['首页', '活动', '活动详情']
     };
   },
   computed: {
@@ -38,6 +42,13 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style scoped lang="less">
+.page {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+
+}
 
 </style>

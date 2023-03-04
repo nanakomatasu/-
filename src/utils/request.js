@@ -1,6 +1,5 @@
 import axios from "axios";
 const request = axios.create({
-  baseURL: "http://www-wms-java.itheima.net/",
   timeout: 3000,
 });
 
@@ -26,3 +25,5 @@ request.interceptors.response.use(
     return Promise.reject(err);
   }
 );
+
+export default request;

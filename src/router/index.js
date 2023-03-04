@@ -5,7 +5,17 @@ Vue.use(VueRouter);
 const routes = [
   { path: "/", redirect: "/login" },
   { path: "/login", component: () => import("@/views/login") },
-  { path: "/home", component: () => import("@/views/home") },
+  {
+    path: "/home",
+    component: () => import("@/views/home"),
+    children: [
+      { path: "bench", component: () => import("@/views/workbench") },
+      {
+        path: "warehouse",
+        component: () => import("@/views/manager/warehouse"),
+      },
+    ],
+  },
 ];
 
 const router = new VueRouter({
