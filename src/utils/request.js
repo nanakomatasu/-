@@ -1,5 +1,6 @@
 import axios from "axios";
 const request = axios.create({
+  baseURL: "/api",
   timeout: 3000,
 });
 
@@ -14,7 +15,7 @@ request.interceptors.request.use(
 
 request.interceptors.response.use(
   (response) => {
-    return response.data;
+    return response.data.data;
   },
   (err) => {
     if (err.response.status === 401) {

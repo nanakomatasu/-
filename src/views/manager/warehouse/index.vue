@@ -144,7 +144,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import request from '@/utils/request';
 export default {
   props: {
 
@@ -207,9 +207,9 @@ export default {
       console.log(row);
     },
     async getlist () {
-      const res = await axios({
+      const res = await request({
         method: 'get',
-        url: '/api/warehouse/list'
+        url: 'warehouse/list'
       })
       console.log(res);
     }
