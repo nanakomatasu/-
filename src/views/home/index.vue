@@ -29,7 +29,9 @@
           <el-menu-item index="2-2" @click="()=>{
             this.$router.push('/home/manage-base-info/area')
           }">库区管理</el-menu-item>
-          <el-menu-item index="2-3">库位管理</el-menu-item>
+          <el-menu-item index="2-3" @click="() => {
+            this.$router.push('/home/manage-base-info/location')
+          }">库位管理</el-menu-item>
           <el-menu-item index="2-4">库位视图</el-menu-item>
           <el-menu-item index="2-5">货品管理</el-menu-item>
           <el-menu-item index="2-6">货品类型管理</el-menu-item>
