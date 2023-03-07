@@ -43,15 +43,12 @@
     highlight-current-row
     @current-change="handleCurrentChange">
     <el-scroll style="width: 100%;height: 100%;">
-    <el-table-column
-      prop="id"
-      label="序号"
-      width="200">
-    </el-table-column>
+
     <el-table-column
       prop="code"
       label="仓库编码"
-      width="120">
+      width="120"
+      fixed="left">
     </el-table-column>
     <el-table-column
       prop="name"

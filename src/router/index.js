@@ -12,7 +12,11 @@ const routes = [
       { path: "bench", component: () => import("@/views/workbench") },
       {
         path: "manage-base-info/warehouse",
-        component: () => import("@/views/manager/warehouse"),
+        component: () => import("@/views/manage-base-info/warehouse"),
+      },
+      {
+        path: "manage-base-info/area",
+        component: () => import("@/views/manage-base-info/area"),
       },
     ],
   },

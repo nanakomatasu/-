@@ -24,9 +24,11 @@
           <span>基础信息管理</span>
         </template>
         <el-menu-item index="2-1"  @click="() => {
-          this.$router.push('/home/warehouse')
+          this.$router.push('/home/manage-base-info/warehouse')
         }">仓库管理</el-menu-item>
-          <el-menu-item index="2-2">库区管理</el-menu-item>
+          <el-menu-item index="2-2" @click="()=>{
+            this.$router.push('/home/manage-base-info/area')
+          }">库区管理</el-menu-item>
           <el-menu-item index="2-3">库位管理</el-menu-item>
           <el-menu-item index="2-4">库位视图</el-menu-item>
           <el-menu-item index="2-5">货品管理</el-menu-item>
@@ -89,7 +91,10 @@
     <headerpage />
     </el-header>
     <el-main>
+      <transition name="fade" mode="out-in">
       <router-view></router-view>
+    </transition>
+
     </el-main>
   </el-container>
 </el-container>
@@ -201,6 +206,14 @@ export default {
 }
 .el-container {
   margin-left: 100px;
+}
+.fade-enter-active,
+.fade-leave-avtive {
+  transition: opacity 0.8s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
 }
 
 </style>
