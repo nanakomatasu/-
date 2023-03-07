@@ -1,5 +1,6 @@
 <template>
 <el-container>
+  <div></div>
   <el-aside width="200px">
 
     <el-col>
@@ -129,8 +130,13 @@ export default {
 </script>
 
 <style scoped lang="less">
+.zhanwei {
+  width: 300px;
+}
 .el-aside{
   text-align: left;
+  position: fixed;
+  left: 0;
   padding: 10px 0;
   box-shadow: 3px 2px 9px 1px rgba(202, 201, 199, 0.47);
   z-index: 9999;
@@ -192,6 +198,9 @@ export default {
 
 .el-header {
   background-color: #f5f1f1;
+}
+.el-container {
+  margin-left: 100px;
 }
 
 </style>

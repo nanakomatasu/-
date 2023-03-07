@@ -25,7 +25,8 @@
    </div>
 
    <div class="woptions">
-  <p> 仓库操作</p>
+    <el-button type="warning" round>搜索</el-button>
+    <el-button type="info" round>重置</el-button>
    </div>
 </el-card>
       </div>
@@ -36,109 +37,101 @@
   <el-table
     :data="tableData"
     border
-    style="width: 100%">
+    stripe
+    width:100
+    style="width: 100%;font-size: 12px;"
+    highlight-current-row
+    @current-change="handleCurrentChange">
+    <el-scroll style="width: 100%;height: 100%;">
     <el-table-column
-      prop="date"
-      label="日期"
-      width="150">
+      prop="id"
+      label="序号"
+      width="200">
+    </el-table-column>
+    <el-table-column
+      prop="code"
+      label="仓库编码"
+      width="120">
     </el-table-column>
     <el-table-column
       prop="name"
-      label="姓名"
+      label="仓库名称"
       width="120">
     </el-table-column>
     <el-table-column
-      prop="province"
-      label="省份"
+    prop="type"
+      label="仓库类型"
       width="120">
+      <template slot-scope="scope">
+        {{ scope.row.type == 'ZZ'?'中转仓':'' }}
+        {{ scope.row.type == 'JG'?'加工仓':'' }}
+        {{ scope.row.type == 'CB'?'储备仓':'' }}
+      </template>
     </el-table-column>
+
     <el-table-column
-      prop="city"
-      label="市区"
-      width="120">
+      prop="location"
+      label="省/市/区"
+      width="200">
     </el-table-column>
     <el-table-column
       prop="address"
-      label="地址"
-      width="300">
+      label="详细地址"
+      width="200">
     </el-table-column>
     <el-table-column
-      prop="zip"
-      label="邮编"
+      label="仓库状态"
+      width="120">
+      <template slot-scope="scope">
+        {{ scope.row.status == '1'?'启用':'停用' }}
+      </template>
+    </el-table-column>
+    <el-table-column
+      prop="surface"
+      label="仓库面积m^2"
       width="120">
     </el-table-column>
     <el-table-column
-      prop="zip"
-      label="邮编"
+      prop="includedNum"
+      label="库区数量"
       width="120">
     </el-table-column>
     <el-table-column
-      prop="zip"
-      label="邮编"
+      prop="personName"
+      label="负责人"
       width="120">
     </el-table-column>
     <el-table-column
-      prop="zip"
-      label="邮编"
+      prop="phone"
+      label="联系电话"
       width="120">
     </el-table-column>
     <el-table-column
-      prop="zip"
-      label="邮编"
-      width="120">
-    </el-table-column>
-    <el-table-column
-      prop="zip"
-      label="邮编"
-      width="120">
-    </el-table-column>
-    <el-table-column
-      prop="zip"
-      label="邮编"
-      width="120">
-    </el-table-column>
-    <el-table-column
-      prop="zip"
-      label="邮编"
-      width="120">
-    </el-table-column>
-    <el-table-column
-      prop="zip"
-      label="邮编"
-      width="120">
-    </el-table-column>
-    <el-table-column
-      prop="zip"
-      label="邮编"
-      width="120">
-    </el-table-column>
-    <el-table-column
-      prop="zip"
-      label="邮编"
-      width="120">
-    </el-table-column>
-    <el-table-column
-      prop="zip"
-      label="邮编"
-      width="120">
-    </el-table-column>
-    <el-table-column
-      prop="zip"
-      label="邮编"
-      width="120">
+      prop="updateTime"
+      label="更新时间"
+      width="140"
+      >
     </el-table-column>
     <el-table-column
       fixed="right"
       label="操作"
-      width="100">
-      <template slot-scope="scope">
+      width="120">
+      <template slot-scope="scope" >
         <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
+        <el-button type="text" size="small">{{ scope.row.status == '1' ? '停用' : '启用' }}</el-button>
         <el-button type="text" size="small">编辑</el-button>
       </template>
     </el-table-column>
+  </el-scroll>
   </el-table>
 </el-card>
-
+<div class="block">
+  <span class="demonstration"></span>
+  <el-pagination
+    layout="prev, pager, next"
+    :total="50">
+  </el-pagination>
+</div>
 </div>
     </div>
 </template>
@@ -159,35 +152,8 @@ export default {
         { value: 2, label: '已启用' },
         { value: 3, label: '停用' },
       ],
-      tableData: [{
-        date: '2016-05-02',
-        name: '王小虎',
-        province: '上海',
-        city: '普陀区',
-        address: '上海市普陀区金沙江路 1518 弄',
-        zip: 200333
-      }, {
-        date: '2016-05-04',
-        name: '王小虎',
-        province: '上海',
-        city: '普陀区',
-        address: '上海市普陀区金沙江路 1517 弄',
-        zip: 200333
-      }, {
-        date: '2016-05-01',
-        name: '王小虎',
-        province: '上海',
-        city: '普陀区',
-        address: '上海市普陀区金沙江路 1519 弄',
-        zip: 200333
-      }, {
-        date: '2016-05-03',
-        name: '王小虎',
-        province: '上海',
-        city: '普陀区',
-        address: '上海市普陀区金沙江路 1516 弄',
-        zip: 200333
-      }]
+      tableData: [],
+      newtype: ''
     };
   },
   computed: {
@@ -212,6 +178,17 @@ export default {
         url: 'warehouse/list'
       })
       console.log(res);
+      this.tableData = res
+      console.log(this.tableData);
+    },
+    setCurrent (row) {
+      this.$refs.singleTable.setCurrentRow(row);
+    },
+    handleCurrentChange (val) {
+      this.currentRow = val;
+    },
+    changestatus (status) {
+      return !status
     }
   },
   components: {
@@ -249,4 +226,27 @@ div {
     margin-bottom: 10px;
   }
 }
+
+.woptions {
+  display: flex;
+  align-items: center;
+}
+
+.el-table {
+/deep/.el-table__body-wrapper::-webkit-scrollbar {
+  width: 10px; /*滚动条宽度*/
+   height: 10px; /*滚动条高度*/}
+/*定义滚动条轨道 内阴影+圆角*/
+/deep/.el-table__body-wrapper::-webkit-scrollbar-track {/*滚动条的背景区域的内阴影*/
+ border-radius: 10px; /*滚动条的背景区域的圆角*/
+   background-color: transparent; /*滚动条的背景颜色*/
+}
+
+/deep/.el-table__body-wrapper::-webkit-scrollbar-thumb {
+/*滚动条的内阴影*/
+  border-radius: 10px; /*滚动条的圆角*/
+  background-color: #ccc; /*滚动条的背景颜色*/
+}
+}
+
 </style>

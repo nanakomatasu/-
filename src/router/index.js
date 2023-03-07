@@ -11,7 +11,7 @@ const routes = [
     children: [
       { path: "bench", component: () => import("@/views/workbench") },
       {
-        path: "warehouse",
+        path: "manage-base-info/warehouse",
         component: () => import("@/views/manager/warehouse"),
       },
     ],
