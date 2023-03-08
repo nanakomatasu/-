@@ -3,17 +3,17 @@
     <div class="title">
       <el-card class="box-card">
  <div class="wid">
-  <p>库区名称</p>
+  <p>货品编号</p>
   <el-input v-model="wid" placeholder="请输入内容"></el-input>
 
  </div>
  <div class="wname">
-  <p>库位名称</p>
+  <p>货品名称</p>
   <el-input v-model="wname" placeholder="请输入内容"></el-input>
 
  </div>
  <div class="wstatus">
- <p>库位状态</p>
+ <p>货主名称</p>
   <el-select v-model="value" placeholder="请选择">
   <el-option
     v-for="item in options"
@@ -33,7 +33,7 @@
 
 <div class="wmain">
 <el-card class="box-card" style="flex-direction: column !important;">
-<div class="addbtn"> <el-button type="success" round>新增库位</el-button></div>
+<div class="addbtn"> <el-button type="success" round>新增货品</el-button></div>
 <el-table
   :data="tableData"
   border
@@ -55,57 +55,105 @@
     label="库区名称"
     width="120">
   </el-table-column> -->
+  <!-- <el-table-column
+    prop="code"
+    label="货品类型名称"
+    width="120"
+    fixed="left">
+  </el-table-column> -->
   <el-table-column
     prop="code"
-    label="库位编号"
+    label="货品编号"
     width="120"
     fixed="left">
   </el-table-column>
   <el-table-column
-    prop="name"
-    label="库位名称"
+   prop="barCode"
+    label="货品条码"
     width="120">
-  </el-table-column>
-  <el-table-column
-    label="温度类型"
-    width="120">
-    <template slot-scope="scope">
+    <!-- <template slot-scope="scope">
       {{ scope.row.temperatureType == 'CW'?'常温':'' }}
       {{ scope.row.temperatureType == 'HW'?'恒温':'' }}
       {{ scope.row.temperatureType == 'LC'?'冷藏':'' }}
-    </template>
+    </template> -->
   </el-table-column>
 
   <el-table-column
-    label="承重类型"
+  prop="name"
+    label="货品名称"
     width="200">
+    <!-- <template slot-scope="scope">
+      {{ scope.row.bearingType == 'QX'?'轻型':'' }}
+      {{ scope.row.bearingType == 'BX'?'中型':'' }}
+      {{ scope.row.bearingType == 'ZX'?'重型':'' }}
+    </template> -->
+  </el-table-column>
+  <el-table-column
+  prop="ownerId"
+    label="货主名称"
+    width="120">
+    <!-- <template slot-scope="scope">
+      {{ scope.row.status == '1'?'启用':'停用' }}
+    </template> -->
+  </el-table-column>
+  <el-table-column
+    prop="maxVolume"
+    label="质检方式"
+    width="120">
     <template slot-scope="scope">
+      {{ scope.row.inspectionType == 'BCL'?'不处理':'' }}
+      {{ scope.row.inspectionType == 'QJ'?'全检':'' }}
+      {{ scope.row.inspectionType == 'CJ'?'抽检':'' }}
+    </template>
+  </el-table-column>
+  <el-table-column
+    label="温度要求"
+    width="120">
+    <template slot-scope="scope">
+      {{ scope.row.temperatureType == 'CW'?'常温':'' }}
+      {{ scope.row.temperatureType == 'LC'?'冷藏':'' }}
+    </template>
+  </el-table-column>
+  <el-table-column
+    prop="updateTime"
+    label="承重要求"
+    width="140"
+    >
+  </el-table-column>
+  <el-table-column
+    prop="updateTime"
+    label="指定库区"
+    width="140"
+    >
+      <template slot-scope="scope">
       {{ scope.row.bearingType == 'QX'?'轻型':'' }}
       {{ scope.row.bearingType == 'BX'?'中型':'' }}
       {{ scope.row.bearingType == 'ZX'?'重型':'' }}
     </template>
   </el-table-column>
   <el-table-column
-    label="停用状态"
-    width="120">
-    <template slot-scope="scope">
-      {{ scope.row.status == '1'?'启用':'停用' }}
-    </template>
+    prop="volume"
+    label="体积"
+    width="140"
+    >
   </el-table-column>
   <el-table-column
-    prop="maxVolume"
-    label="承载上限"
-    width="120">
+    prop="price"
+    label="单价"
+    width="140"
+    >
   </el-table-column>
   <el-table-column
-    label="用途属性"
-    width="120">
-    <template slot-scope="scope">
-      {{ scope.row.useType == 'RKHCQ'?'入库缓存区':'' }}
-      {{ scope.row.useType == 'ZJQ'?'质检区':'' }}
-      {{ scope.row.useType == 'CKHCQ'?'出库缓存区':'' }}
-      {{ scope.row.useType == 'CCQ'?'储存区':'' }}
-    </template>
+    prop="unit"
+    label="单位"
+    width="140"
+    >
+  </el-table-column>
+  <el-table-column
+    prop="guaranteeDay"
+    label="保质天数"
+    width="140"
+    >
   </el-table-column>
   <el-table-column
     prop="updateTime"
@@ -176,7 +224,7 @@ export default {
     async getlist () {
       const res = await request({
         method: 'get',
-        url: 'location/list'
+        url: 'goods/list'
       })
       console.log(res);
       this.tableData = res

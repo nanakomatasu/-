@@ -22,6 +22,10 @@ const routes = [
         path: "manage-base-info/location",
         component: () => import("@/views/manage-base-info/location"),
       },
+      {
+        path: "manage-base-info/goods",
+        component: () => import("@/views/manage-base-info/goods"),
+      },
     ],
   },
 ];

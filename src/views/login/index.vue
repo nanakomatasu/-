@@ -52,7 +52,7 @@ export default {
     tohome () {
       this.loding = true
       setTimeout(() => {
-        if (this.username === 'admin' && this.password === '111111') { this.$router.push('/home') } else {
+        if (this.username === 'admin' && this.password === '111111') { this.$router.push('/home/bench') } else {
           if (this.password !== '111111' && this.username !== 'admin') {
             this.ispas = true
             this.isuser = true
